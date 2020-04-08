@@ -4,8 +4,16 @@ import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import useVisualMode from "hooks/useVisualMode";
 
 export default function Application(props) {
+
+  const EMPTY = "EMPTY";
+  const SHOW = "SHOW";
+
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
   const [state, setState] = useState({
     day: "Monday",
@@ -40,7 +48,6 @@ export default function Application(props) {
   const interviewers = getInterviewersForDay(state, state.day);
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -53,13 +60,27 @@ export default function Application(props) {
       ...state,
       appointments
     });
+    return axios.put(`api/appointments/${id}`, appointment);
   }
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
+
+  const cancelInterview = function(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
     };
-  }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    setState({
+      ...state,
+      appointments
+    });
+
+    console.log("after: ", state.appointments[id].interview);
+    return axios.delete(`api/appointments/${id}`, appointment);
+  };
 
   return (
     <main className="layout">
@@ -84,11 +105,13 @@ export default function Application(props) {
         const interview = getInterview(state, appointment.interview);
         return (
           <Appointment
+          key={appointment.id}
           id={appointment.id}
           time={appointment.time}
           interview={interview}
           interviewers={interviewers}
           bookInterview={bookInterview}
+          cancelInterview={cancelInterview}
         />
         );
       })}
