@@ -49,6 +49,10 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
+    setState({
+      ...state,
+      appointments
+    });
   }
   function save(name, interviewer) {
     const interview = {
@@ -84,7 +88,7 @@ export default function Application(props) {
           time={appointment.time}
           interview={interview}
           interviewers={interviewers}
-          bookInterview={bookInterview(appointment.id, interview)}
+          bookInterview={bookInterview}
         />
         );
       })}
