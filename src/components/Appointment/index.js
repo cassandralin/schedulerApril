@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Empty from "components/Appointment/Empty";
 import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
