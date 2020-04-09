@@ -42,7 +42,7 @@ export default function useApplicationData() {
     };
 
     //creates a new state.days object with the updated spots
-    //spots decreases by one when a new appointment is booked
+    //spots decrease when a new appointment is booked
     const a = state.days.map(day => {
       if (day.name === state.day) {
         day.spots--;
@@ -69,7 +69,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
     //creates a new state.days object with the updated spots
-    //spots increases by one when an appointment is deleted
+    //spots increase one when an appointment is deleted
     const a = state.days.map(day => {
       if (day.name === state.day) {
         day.spots++;
