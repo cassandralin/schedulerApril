@@ -4,9 +4,9 @@ Scheduler is a web application built with React and Storybook that uses Jest and
 
 # Final Product
 
-!["Screenshot of initial page on load"](docs/TweeterFirstPage.png)
-!["Screenshot of an example tweet"](docs/TweeterFirstTweet.png)
-!["Screenshot of a tweet that is too long"](docs/TweeterTweetLong.png)
+!["Screenshot of initial page on load"](docs/1Initial.png)
+!["Screenshot of how to add an appointment"](docs/2AddAppointment.png)
+!["Screenshot of how to delete an appointment"](docs/3DeleteAppointment.png)
 
 
 ## Setup
